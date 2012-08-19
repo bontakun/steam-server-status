@@ -1,7 +1,7 @@
 {
     "name" : "steam-server-status",
     "description" : "A steam server status library for node",
-    "version" : "1.0.1",
+    "version" : "1.0.2",
     "author" : "Benjamin Dow <benjamin.dow@gmail.com>",
 
     "repository" : {

@@ -22,12 +22,16 @@ How to use it
 The library provides basic functionality for requesting the status and statistics of a steam source engine game. The simplest use case you just make a call like this:
 
     var steamServerStatus = require(steam-server-status');
-	steamServerStatus.getServerStatus(
-		'tf.bonta-kun.net', 27015, function(serverInfo) {
-			console.log("game: " + serverInfo.gameName);
-			console.log("server name: " + serverInfo.serverName);
-			console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
-		});
+    steamServerStatus.getServerStatus(
+        'tf.bonta-kun.net', 27015, function(serverInfo) {
+            if (serverInfo.error) {
+                console.log(serverInfo.error);
+            } else {
+                console.log("game: " + serverInfo.gameName);
+                console.log("server name: " + serverInfo.serverName);
+                console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
+            }
+    });
 
 This will connect to a server and split out ot the logs what game the server is playing, what the server name is listed as and how many people are playing on it.
 
@@ -35,6 +39,10 @@ Server Info Object
 ------------------
 
 This object hems very closely to the [Valve's response format documentation](https://developer.valvesoftware.com/wiki/Source_Server_Queries#Reply_format_3).
+
+### error 
+
+This is used to check if there was an error talking to the server, it will be undefined if there were no problems, if it's populated it'll be a error message.
 
 ### version
 
