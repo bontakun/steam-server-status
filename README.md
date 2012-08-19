@@ -21,7 +21,7 @@ How to use it
 
 The library provides basic functionality for requesting the status and statistics of a steam source engine game. The simplest use case you just make a call like this:
 
-    var steamServerStatus = require(steamServerStatus');
+    var steamServerStatus = require(steam-server-status');
 	steamServerStatus.getServerStatus(
 		'tf.bonta-kun.net', 27015, function(serverInfo) {
 			console.log("game: " + serverInfo.gameName);
@@ -34,7 +34,7 @@ This will connect to a server and split out ot the logs what game the server is 
 Server Info Object
 ------------------
 
-This object hems very closely to the [Valve's response format documentation] (https://developer.valvesoftware.com/wiki/Source_Server_Queries#Reply_format_3).
+This object hems very closely to the [Valve's response format documentation](https://developer.valvesoftware.com/wiki/Source_Server_Queries#Reply_format_3).
 
 ### version
 
