@@ -1,9 +1,9 @@
 {
     "name" : "steam-server-status",
     "description" : "A steam server status library for node",
-    "version" : "1.0",
+    "version" : "1.0.0",
     "author" : "Benjamin Dow <benjamin.dow@gmail.com>",
-    "contributors" : [],
+
     "repository" : {
         "type" : "git",
         "url" : "http://github.com/bontakun/steam-server-status"
@@ -14,9 +14,9 @@
     },
     "main" : "lib/steam-server-status",
     "engines" : { 
-        "node" : ">= 0.8.7" 
-        },
+        "node" : ">= 0.8.5" 
+    },
     "licenses" : [ {
-        "type" : "BSD",
+        "type" : "BSD"
     } ]
 }
