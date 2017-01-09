@@ -7,19 +7,50 @@ var steamServerStatus = require(__dirname + '/../lib/steam-server-status');
  * Simple callback function to dump server info to logs.
  */
 function echoServerInfo(serverInfo) {
-    if (serverInfo.error) {
-        console.log(serverInfo.error);
-    } else {
-        console.log("game: " + serverInfo.gameName);
-        console.log("server name: " + serverInfo.serverName);
-        console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
-    }
+    console.log("game: " + serverInfo.gameName);
+    console.log("server name: " + serverInfo.serverName);
+    console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
 }
 
 // this should return correctly.
-steamServerStatus.getServerStatus(
-    'tf.bonta-kun.net', 27015, echoServerInfo);
+steamServerStatus.queryServer('tf.bonta-kun.net:27015')
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
 
 // this should timeout
-steamServerStatus.getServerStatus(
-    'tf.bonta-kun.net', 80, echoServerInfo);
+steamServerStatus.queryServer('tf.bonta-kun.net:80')
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
+
+
+// Multiple querys example
+steamServerStatus.queryServer([
+    'tf.bonta-kun.net:27015',
+    ['tf.bonta-kun.net:80', {port: 27015}]
+  ])
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
+
+steamServerStatus.queryServer([
+    'tf.bonta-kun.net:27015',
+    'tf.bonta-kun.net:80',
+    ['tf.bonta-kun.net:80', {port: 27015}]
+  ])
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  }) // will return here, all errors fail the entire stack.
