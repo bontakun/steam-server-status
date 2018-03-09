@@ -7,19 +7,56 @@ var steamServerStatus = require(__dirname + '/../lib/steam-server-status');
  * Simple callback function to dump server info to logs.
  */
 function echoServerInfo(serverInfo) {
-    if (serverInfo.error) {
-        console.log(serverInfo.error);
-    } else {
-        console.log("game: " + serverInfo.gameName);
-        console.log("server name: " + serverInfo.serverName);
-        console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
-    }
+    console.log("######");
+    console.log("game: " + serverInfo.gameName);
+    console.log("server name: " + serverInfo.serverName);
+    console.log("players: " + serverInfo.numberOfPlayers + "/" + serverInfo.maxNumberOfPlayers)
+    console.log("######");
 }
 
 // this should return correctly.
-steamServerStatus.getServerStatus(
-    'tf.bonta-kun.net', 27015, echoServerInfo);
+steamServerStatus.queryServer('162.248.93.211:27015')
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
 
 // this should timeout
-steamServerStatus.getServerStatus(
-    'tf.bonta-kun.net', 80, echoServerInfo);
+steamServerStatus.queryServer('31.186.251.170:6654')
+  .then((res) => {
+    echoServerInfo(res)
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
+
+
+// Multiple querys example
+steamServerStatus.queryServer([
+    '31.186.251.170:27015',
+    ['162.248.93.211:27015', {port: 27015}]
+  ])
+  .then((res) => {
+    res.forEach(server => {
+        echoServerInfo(server)
+    })
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  })
+
+steamServerStatus.queryServer([
+    '31.186.251.170:27015',
+    '87.117.217.32:27017',
+    ['162.248.93.211:27015', {port: 27015}]
+  ])
+  .then((res) => {
+    res.forEach(server => {
+        echoServerInfo(server)
+    })
+  })
+  .catch((err) => {
+    console.error("An error occurred", err)
+  }) // will return here, all errors fail the entire stack.
