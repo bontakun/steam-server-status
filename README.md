@@ -21,7 +21,7 @@ How to use it
 
 The library provides basic functionality for requesting the status and statistics of a steam source engine game. The simplest use case you just make a call like this:
 
-    var steamServerStatus = require(steam-server-status');
+    const steamServerStatus = require('steam-server-status');
     steamServerStatus.getServerStatus(
         'tf.bonta-kun.net', 27015, function(serverInfo) {
             if (serverInfo.error) {
