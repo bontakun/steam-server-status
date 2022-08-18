@@ -1,7 +1,7 @@
 {
     "name" : "steam-server-status-challenge-fix",
     "description" : "A steam server status library for node",
-    "version" : "2.1.0",
+    "version" : "2.1.1",
     "author" : "Benjamin Dow <benjamin.dow@gmail.com>, Ian Dresarie <iandresarie@starleague.me>",
 
     "repository" : {
